@@ -19,10 +19,12 @@ The loop after a UI change:
    `gh pr view <number> --comments`.
 3. Give the user the watch link and the GIF from the comment.
 
-To film a URL with no pull request: install the CLI once
-(`curl -fsSL https://app.questline.ai/install.sh | sh`, then
-`qa login`) and run `qa film <url> --brief "<changelog line>"`. It
-prints the watch link when the film is ready.
+To film a URL with no pull request: install the CLI
+(`curl -fsSL https://app.questline.ai/install.sh | sh`) and run
+`qa film <url> --brief "<changelog line>"`. The first run opens a
+browser once so the human can approve the machine; that click is
+theirs, so wait for it. The command prints the watch link and saves a
+poster file. Reply with both.
 
 Rules:
 

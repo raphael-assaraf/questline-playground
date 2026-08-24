@@ -33,6 +33,16 @@ the instructions. One pull request per attempt.
 
 ## Film a URL without a pull request
 
-    curl -fsSL https://app.questline.ai/install.sh | sh   # once
-    qa login                                              # once
+    curl -fsSL https://app.questline.ai/install.sh | sh
     qa film <url> --brief "<changelog line>"
+
+The first film opens a browser once so you can approve the machine.
+
+## Before each test run
+
+This repo's instructions change often. Start every run from a clean
+checkout, or the agent reads stale rules:
+
+    git pull
+    git clean -fd
+    git checkout -- .
