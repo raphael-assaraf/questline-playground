@@ -1,33 +1,36 @@
 ---
 name: record-demo
-description: Film a browser session of this app with questline and publish it. Use after shipping a UI change, before opening the pull request.
+description: Get a filmed demo of a change in this app. Open a pull request; the questline fleet films the preview deployment and posts the film on the pull request.
 ---
 
-# Record a demo with questline
+# Filmed previews with questline
 
-The recorder films a headless Chrome from outside this process; the
-record cannot be edited from here. If `qa` is missing:
-`curl -fsSL https://app.questline.ai/install.sh | sh`.
+This repo is connected to questline. Every pull request gets a Vercel
+preview deployment. The questline fleet films the preview in its own
+cloud Chrome, outside this process, and posts the film on the pull
+request: a GIF, a watch link, and the console and network evidence
+from the take. Nothing records on this machine.
 
-1. Serve the app: `python3 -m http.server 8899` (background).
-2. Start the recorder (background):
-   `qa watch http://localhost:8899 --out recordings/<slug> --title "<changelog line>"`
-3. Wait 6 s. Drive the recorded Chrome with Playwright over
-   `connect_over_cdp("http://localhost:9223")`. Move the mouse in 20+
-   steps, pause 2 s after each click and navigation, 4 s on the last
-   screen. Name chapters with
-   `page.evaluate("l => window.__qaMark && window.__qaMark(l)", "<label>")`.
-4. Stop: `touch recordings/<slug>/stop`. The film renders on stop; wait
-   for `report.html` to appear.
-5. Publish: `qa push recordings/<slug>` (prints the watch URL and the
-   embed markdown). Post to the PR: `qa pr recordings/<slug>`.
+The loop after a UI change:
 
-After push, show the user `recordings/<slug>/poster.jpg` plus the watch
-URL (chats embed images; most do not embed video).
+1. Push a branch and open a pull request (`gh pr create`).
+2. Wait for the questline comment. It lands about three minutes after
+   the Vercel preview is ready. Poll with
+   `gh pr view <number> --comments`.
+3. Show the user the watch link and the GIF from the comment.
 
-Rules: questline is self-contained, install no other skills or
-extensions for it; stop the take the moment the flow ends (an unstopped
-take multiplies the render); a film with zero clicks proves nothing, so
-click the change; verify the flow works before recording; re-record a
-failed take; never stage the DOM; titles are changelog lines with no
-hype words.
+To film a URL with no pull request: install the CLI once
+(`curl -fsSL https://app.questline.ai/install.sh | sh`, then
+`qa login`) and run `qa film <url> --brief "<changelog line>"`. It
+prints the watch link when the film is ready.
+
+Rules:
+
+- One pull request per subject. One film per deployment; do not
+  re-trigger a film for the same commit.
+- The film shows the deployed app. Confirm the preview builds before
+  you promise a film.
+- Film briefs and session titles are changelog lines ("worker service
+  reports up"). No hype words.
+- Do not submit forms that create, change, or delete server data
+  unless the user grants it.

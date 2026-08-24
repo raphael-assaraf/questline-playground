@@ -1,9 +1,8 @@
-# questline needs two things the default Codex sandbox blocks: the local
-# Chrome debug port and app.questline.ai for qa push. workspace-write
-# with network access covers both; the writable roots hold the recorder
-# profile and the login token.
+# The cloud loop needs the network for git, gh, and app.questline.ai.
+# No local Chrome and no recorder run on this machine; ~/.qa-agent
+# holds the login token when the CLI path is used.
 sandbox_mode = "workspace-write"
 
 [sandbox_workspace_write]
 network_access = true
-writable_roots = ["~/chrome-for-agents-watch", "~/.qa-agent", "~/Library/Caches/ms-playwright"]
+writable_roots = ["~/.qa-agent"]
