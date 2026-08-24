@@ -22,5 +22,12 @@ record cannot be edited from here. If `qa` is missing:
 5. Publish: `qa push recordings/<slug>` (prints the watch URL and the
    embed markdown). Post to the PR: `qa pr recordings/<slug>`.
 
-Rules: verify the flow works before recording; re-record a failed take;
-never stage the DOM; titles are changelog lines with no hype words.
+After push, show the user `recordings/<slug>/poster.jpg` plus the watch
+URL (chats embed images; most do not embed video).
+
+Rules: questline is self-contained, install no other skills or
+extensions for it; stop the take the moment the flow ends (an unstopped
+take multiplies the render); a film with zero clicks proves nothing, so
+click the change; verify the flow works before recording; re-record a
+failed take; never stage the DOM; titles are changelog lines with no
+hype words.
