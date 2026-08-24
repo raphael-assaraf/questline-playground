@@ -1,7 +1,7 @@
 const SERVICES = [
   { name: "api", up: true },
   { name: "dashboard", up: true },
-  { name: "worker", up: false },
+  { name: "worker", up: true },
 ];
 
 function render() {
